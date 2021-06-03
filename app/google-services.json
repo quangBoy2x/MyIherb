@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "512673538427",
+    "project_id": "quang-huy-ninja",
+    "storage_bucket": "quang-huy-ninja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512673538427:android:7dead942542ef91f7bddde",
+        "android_client_info": {
+          "package_name": "com.example.project_thuc_tap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512673538427-mok35ke8t7jgiubfjbtq85d34meqjemk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAslX_GxyxxK5uSDIxzjDuY_AESpZB6_Hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512673538427-mok35ke8t7jgiubfjbtq85d34meqjemk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
