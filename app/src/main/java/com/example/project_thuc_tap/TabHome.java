@@ -1,5 +1,6 @@
 package com.example.project_thuc_tap;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -28,7 +29,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.project_thuc_tap.activity.DetailProduct;
 import com.example.project_thuc_tap.adapter.ProductAdapter;
+import com.example.project_thuc_tap.model.Cart;
 import com.example.project_thuc_tap.model.Product;
 import com.example.project_thuc_tap.ulities.Server;
 import com.squareup.picasso.Picasso;
@@ -55,6 +58,7 @@ public class TabHome extends Fragment {
     ArrayList<Product> products;
     ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
     RecyclerView recyclerViewHome;
+    public static ArrayList<Cart> carts;
 
 
 
@@ -112,11 +116,20 @@ public class TabHome extends Fragment {
         recyclerViewHome.setHasFixedSize(true);
         recyclerViewHome.setLayoutManager(new GridLayoutManager(getActivity(),2));
         recyclerViewHome.setAdapter(productAdapter);
+        if(carts!=null){
+
+        }else{
+            carts = new ArrayList<>();
+        }
         //MapEnd
         ActionViewFlipper();
         GetDataNewProduct();
 
         return view;
+    }
+
+    public void TransferDataToDetailProduct(){
+
     }
 
     private void GetDataNewProduct() {
@@ -143,7 +156,8 @@ public class TabHome extends Fragment {
                             HinhAnhSp = jsonObject.getString("hinhanhSP");
                             MotaSP = jsonObject.getString("mota");
                             IDLoaiSp = jsonObject.getInt("idLoai");
-
+                            XepLoai = jsonObject.getInt("rate");
+                            Log.d("TabHome", "xeploai " + XepLoai);
                             //int ID, String tenSP, Integer giaSp, String hinhAnhSp, String motaSP, int IDloaiSP, int rate
                             products.add(new Product(ID, TenSP, GiaSp, HinhAnhSp, MotaSP, IDLoaiSp, XepLoai));
                             //cập nhật lại giao diện

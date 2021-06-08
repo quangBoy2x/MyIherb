@@ -1,6 +1,7 @@
 package com.example.project_thuc_tap.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_thuc_tap.R;
+import com.example.project_thuc_tap.activity.DetailProduct;
 import com.example.project_thuc_tap.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +47,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tvGiaSp.setText("Price: "+String.valueOf(decimalFormat.format(product.getGiaSp()))+" Đ");
         Picasso.with(context).load(product.getHinhAnhSp()).placeholder(R.drawable.warning).error(R.drawable.warning).into(holder.imgHinhSanPham);
+        holder.parentLayout.setOnClickListener(v -> {
+            //TODO
+            Intent intent = new Intent(context, DetailProduct.class);
+            intent.putExtra("thongtinsp", arrayList.get(position));
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -54,6 +63,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
     public class ItemHolder extends RecyclerView.ViewHolder{
         public ImageView imgHinhSanPham, imgNewStatic;
         public TextView tvTenSp, tvGiaSp, tvXepLoai;
+        ConstraintLayout parentLayout;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +71,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
             tvTenSp = itemView.findViewById(R.id.tvLineNameProduct);
             tvGiaSp = itemView.findViewById(R.id.tvLinePrice);
             tvXepLoai = itemView.findViewById(R.id.tvRateProduct);
+            parentLayout = itemView.findViewById(R.id.lineProduct);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.project_thuc_tap;
+package com.example.project_thuc_tap.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.project_thuc_tap.R;
 import com.example.project_thuc_tap.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

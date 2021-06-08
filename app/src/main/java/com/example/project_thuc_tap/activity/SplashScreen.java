@@ -1,4 +1,4 @@
-package com.example.project_thuc_tap;
+package com.example.project_thuc_tap.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.project_thuc_tap.R;
 
 public class SplashScreen extends AppCompatActivity {
 
