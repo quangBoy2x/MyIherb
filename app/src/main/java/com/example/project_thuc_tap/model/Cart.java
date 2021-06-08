@@ -54,5 +54,16 @@ public class Cart {
     public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", tensp='" + tensp + '\'' +
+                ", giasp=" + giasp +
+                ", hinhanh='" + hinhanh + '\'' +
+                ", soluong=" + soluong +
+                '}';
+    }
 }
 

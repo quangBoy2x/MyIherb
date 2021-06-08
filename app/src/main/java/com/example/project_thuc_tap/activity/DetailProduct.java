@@ -21,6 +21,7 @@ import com.example.project_thuc_tap.model.Cart;
 import com.example.project_thuc_tap.model.Product;
 import com.squareup.picasso.Picasso;
 
+import java.security.cert.TrustAnchor;
 import java.text.DecimalFormat;
 
 public class DetailProduct extends AppCompatActivity {
@@ -53,42 +54,45 @@ public class DetailProduct extends AppCompatActivity {
 
     }
 
-
+    //xử lí add sản phẩm vào giỏ hàng
     void AddToCart(){
         btnAddToCart.setOnClickListener(v -> {
-            if(TabHome.carts.size() > 0){
-                //kiem tra carts co update hay khong
-                boolean flag = false;
-                for(int i = 0; i<TabHome.carts.size(); i++){
-                    if(TabHome.carts.get(i).getId() == id){
-                        TabHome.carts.get(i).setSoluong(TabHome.carts.get(i).getSoluong() + totalQuantity);
+            if(totalQuantity == 0){
+                Toast.makeText(getApplicationContext() ,"You didnt choose your quantity!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                if (TabHome.carts.size() > 0) {
+                    //neu mang da co san pham
+                    boolean exist = false;
+                    for(int i = 0 ;i< TabHome.carts.size(); i++){
+                        // rà soát lần lượt từng phần tử của mảng nếu có thằng nào trùng với id thì là cập nhất số lượng lên
+                        // cập nhật totalQuantity
+                        if(TabHome.carts.get(i).getId() == id){
+                            TabHome.carts.get(i).setSoluong(TabHome.carts.get(i).getSoluong() + totalQuantity);
 
-                        //kiểm tra sau khi upadet số lượng mua cơ mà lớn qua cho về 15
-                        if(TabHome.carts.get(i).getSoluong()>=15){
-                            TabHome.carts.get(i).setSoluong(15);
+                            //nếu cập nhật cơ mà số lượng quá nhiều thì phải cho mặc định là 15 thui
+                            if(TabHome.carts.get(i).getSoluong() >= 17){
+                                TabHome.carts.get(i).setSoluong(17);
+                            }
+                            TabHome.carts.get(i).setGiasp(price*TabHome.carts.get(i).getSoluong());
+                            exist = true;
                         }
+                    }
 
-                        //tổng tiền của toàn bộ sản phẩm
-                        TabHome.carts.get(i).setGiasp(price*TabHome.carts.get(i).getSoluong());
-                        flag = true;
+                    if(exist == false){
+                        long totalPrice = totalQuantity * price;
+                        TabHome.carts.add(new Cart(id, name, totalPrice, img, totalQuantity));
                     }
                 }
-
-                if(flag = false){
-                    long giaMoi = totalQuantity * price;
-                    TabHome.carts.add(new Cart(id,name, giaMoi, img, totalQuantity));
+                else{
+                    long totalPrice = totalQuantity * price;
+                    TabHome.carts.add(new Cart(id, name, totalPrice, img, totalQuantity));
                 }
-
-
-            }else {
-                //neu chua co gi thi tao moi
-                long giaMoi = totalQuantity * price;
-//                int id, String tensp, long giasp, String hinhanh, int soluong
-                TabHome.carts.add(new Cart(id,name, giaMoi, img, totalQuantity));
             }
 
-            Intent intent = new Intent(getApplicationContext(), TabShopping.class);
-            startActivity(intent);
+            Log.d("current", "" + TabHome.carts.size());
+
+
         });
     }
 
