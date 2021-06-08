@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgItemCart"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/warning" />
+
+    <TextView
+        android:id="@+id/tvNameItemCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Tên sp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/imgItemCart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTotalItemCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Gía sp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/imgItemCart"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameItemCart" />
+
+    <TextView
+        android:id="@+id/tvQuantitiItemCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Số lượng"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubItemCart"
+        app:layout_constraintStart_toEndOf="@+id/btnAddItemCart"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalItemCart" />
+
+    <TextView
+        android:id="@+id/tvDescribeItemCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="sans-serif-light"
+        android:text="This Product From Iherb"
+        android:textColor="#1EE80F"
+        android:textSize="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgItemCart" />
+
+    <ImageButton
+        android:id="@+id/btnAddItemCart"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/imgItemCart"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalItemCart"
+        app:srcCompat="@drawable/plus_item" />
+
+    <ImageButton
+        android:id="@+id/btnSubItemCart"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="44dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalItemCart"
+        app:srcCompat="@drawable/subtract_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

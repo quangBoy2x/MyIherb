@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_Thuc_Tap"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.DetailProduct"></activity>
+        <activity android:name=".activity.DetailProduct" />
         <activity android:name=".activity.RegisterScreen" />
         <activity android:name=".activity.LoginScreen">
             <intent-filter>

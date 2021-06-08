@@ -20,6 +20,8 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+//Adapter cho RecyclerView
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHolder> {
 
     Context context; //màn hình mà muốn đổ vào

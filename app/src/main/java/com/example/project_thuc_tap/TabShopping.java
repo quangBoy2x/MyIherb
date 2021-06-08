@@ -6,10 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import com.example.project_thuc_tap.adapter.CartAdapter;
+
+import java.text.DecimalFormat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +28,10 @@ public class TabShopping extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    Button btnTest;
+    Button btnPurchase, btnContinueShopping;
+    TextView tvDefaultIfNull, tvTotalPrice, tvTotalProducts;
+    ListView lvProducts;
+    CartAdapter adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,11 +76,39 @@ public class TabShopping extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_tab_shopping, container, false);
-        btnTest = (Button) v.findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(v1 -> {
-            Log.d("current", TabHome.carts.toString());
-        });
+        //Map
+        btnContinueShopping = (Button) v.findViewById(R.id.btnContinue);
+        btnPurchase = (Button) v.findViewById(R.id.btnPurchase);
+        tvDefaultIfNull = (TextView) v.findViewById(R.id.tvDefaultIfNull);
+        tvTotalPrice = (TextView) v.findViewById(R.id.tvTotalPrice);
+        tvTotalProducts = (TextView) v.findViewById(R.id.tvTotalProducts);
+        lvProducts = (ListView) v.findViewById(R.id.lvProducts) ;
+        adapter = new CartAdapter(getActivity(), TabHome.carts);
+        lvProducts.setAdapter(adapter);
+        CheckData();
+        EvenUlties();
 
         return v;
+    }
+
+    private void EvenUlties() {
+        long totalPrice = 0;
+        for(int i = 0; i <TabHome.carts.size();i++){
+            totalPrice += TabHome.carts.get(i).getGiasp();
+        }
+        DecimalFormat del = new DecimalFormat("###,###,###");
+        tvTotalPrice.setText(del.format(totalPrice) + "Đ");
+    }
+
+    private void CheckData() {
+        if(TabHome.carts.size() <=0){
+//            adapter.notifyDataSetChanged();
+            tvDefaultIfNull.setVisibility(View.VISIBLE);
+            lvProducts.setVisibility(View.INVISIBLE);
+        }else {
+//            adapter.notifyDataSetChanged();
+            tvDefaultIfNull.setVisibility(View.INVISIBLE);
+            lvProducts.setVisibility(View.VISIBLE);
+        }
     }
 }
