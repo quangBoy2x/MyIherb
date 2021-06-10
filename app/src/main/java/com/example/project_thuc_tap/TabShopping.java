@@ -1,10 +1,13 @@
 package com.example.project_thuc_tap;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.PrecomputedText;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.project_thuc_tap.adapter.CartAdapter;
+import com.example.project_thuc_tap.model.Cart;
 
 import java.text.DecimalFormat;
 
@@ -29,7 +33,9 @@ public class TabShopping extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     Button btnPurchase, btnContinueShopping;
-    TextView tvDefaultIfNull, tvTotalPrice, tvTotalProducts;
+    TextView tvDefaultIfNull;
+    static TextView tvTotalPrice;
+    TextView tvTotalProducts;
     ListView lvProducts;
     CartAdapter adapter;
 
@@ -91,7 +97,11 @@ public class TabShopping extends Fragment {
         return v;
     }
 
-    private void EvenUlties() {
+
+
+
+    //cho pulic để sử dụng cho bên cartAdapter trường hợp update lại sản phẩm
+    public static void EvenUlties() {
         long totalPrice = 0;
         for(int i = 0; i <TabHome.carts.size();i++){
             totalPrice += TabHome.carts.get(i).getGiasp();

@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.project_thuc_tap.R;
+import com.example.project_thuc_tap.TabHome;
+import com.example.project_thuc_tap.TabShopping;
 import com.example.project_thuc_tap.model.Cart;
+import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -75,7 +78,59 @@ public class CartAdapter extends BaseAdapter {
         view.tvQuantityItemCart.setText(String.valueOf(cart.getSoluong()));
         Picasso.with(context).load(cart.getHinhanh()).placeholder(R.drawable.warning)
                 .error(R.drawable.warning).into(view.imgItemCart);
+        int sl = Integer.valueOf(view.tvQuantityItemCart.getText().toString());//lay sl hieejn taji
 
+        if(sl >= 16){
+            view.btnAddItemCart.setVisibility(View.INVISIBLE);
+            view.btnSubItemCart.setVisibility(View.VISIBLE);
+        }else if(sl <= 1){
+            view.btnAddItemCart.setVisibility(View.VISIBLE);
+            view.btnSubItemCart.setVisibility(View.INVISIBLE);
+        }else if(sl >= 1){
+            view.btnAddItemCart.setVisibility(View.VISIBLE);
+            view.btnSubItemCart.setVisibility(View.VISIBLE);
+        }
+        //xử lí khi bấm nút cộng trừ trong giỏ hàng thì giá sẽ cập nhật luôn
+        ViewHolder finalView = view;
+        view.btnAddItemCart.setOnClickListener(v -> {
+            int slMoiNhat = Integer.valueOf(finalView.tvQuantityItemCart.getText().toString()) + 1;
+            int slHienTai = TabHome.carts.get(position).getSoluong();
+            long giaHienTai = TabHome.carts.get(position).getGiasp();
+            TabHome.carts.get(position).setSoluong(slMoiNhat);
+            long giaMoiNhat = (giaHienTai * slMoiNhat) / slHienTai;
+            TabHome.carts.get(position).setGiasp(giaMoiNhat);
+            finalView.tvTotalItemCart.setText(decimalFormat.format(giaMoiNhat) + "Đ");
+            TabShopping.EvenUlties();
+            if(slMoiNhat > 16){
+                finalView.btnAddItemCart.setVisibility(View.INVISIBLE);
+                finalView.btnSubItemCart.setVisibility(View.VISIBLE);
+                finalView.tvQuantityItemCart.setText(String.valueOf(slMoiNhat));
+            }else {
+                finalView.btnAddItemCart.setVisibility(View.VISIBLE);
+                finalView.btnSubItemCart.setVisibility(View.VISIBLE);
+                finalView.tvQuantityItemCart.setText(String.valueOf(slMoiNhat));
+            }
+        });
+
+        view.btnSubItemCart.setOnClickListener(v -> {
+            int slMoiNhat = Integer.valueOf(finalView.tvQuantityItemCart.getText().toString()) - 1;
+            int slHienTai = TabHome.carts.get(position).getSoluong();
+            long giaHienTai = TabHome.carts.get(position).getGiasp();
+            TabHome.carts.get(position).setSoluong(slMoiNhat);
+            long giaMoiNhat = (giaHienTai * slMoiNhat) / slHienTai;
+            TabHome.carts.get(position).setGiasp(giaMoiNhat);
+            finalView.tvTotalItemCart.setText(decimalFormat.format(giaMoiNhat) + "Đ");
+            TabShopping.EvenUlties();
+            if(slMoiNhat < 2){
+                finalView.btnAddItemCart.setVisibility(View.VISIBLE);
+                finalView.btnSubItemCart.setVisibility(View.INVISIBLE);
+                finalView.tvQuantityItemCart.setText(String.valueOf(slMoiNhat));
+            }else {
+                finalView.btnAddItemCart.setVisibility(View.VISIBLE);
+                finalView.btnSubItemCart.setVisibility(View.VISIBLE);
+                finalView.tvQuantityItemCart.setText(String.valueOf(slMoiNhat));
+            }
+        });
 
         return convertView;
     }
