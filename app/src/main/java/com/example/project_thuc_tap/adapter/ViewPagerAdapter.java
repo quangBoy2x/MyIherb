@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.project_thuc_tap.TabAccount;
-import com.example.project_thuc_tap.TabHome;
-import com.example.project_thuc_tap.TabList;
-import com.example.project_thuc_tap.TabShopping;
+import com.example.project_thuc_tap.activity.TabAccount;
+import com.example.project_thuc_tap.activity.TabHome;
+import com.example.project_thuc_tap.activity.TabList;
+import com.example.project_thuc_tap.activity.TabShopping;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {

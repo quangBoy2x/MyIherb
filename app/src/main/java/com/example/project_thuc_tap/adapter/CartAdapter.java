@@ -5,16 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.project_thuc_tap.R;
-import com.example.project_thuc_tap.TabHome;
-import com.example.project_thuc_tap.TabShopping;
+import com.example.project_thuc_tap.activity.TabHome;
+import com.example.project_thuc_tap.activity.TabShopping;
 import com.example.project_thuc_tap.model.Cart;
-import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;

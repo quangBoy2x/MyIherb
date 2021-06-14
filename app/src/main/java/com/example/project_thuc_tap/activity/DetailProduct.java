@@ -2,26 +2,19 @@ package com.example.project_thuc_tap.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Printer;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.project_thuc_tap.R;
-import com.example.project_thuc_tap.TabHome;
-import com.example.project_thuc_tap.TabShopping;
 import com.example.project_thuc_tap.model.Cart;
 import com.example.project_thuc_tap.model.Product;
 import com.squareup.picasso.Picasso;
 
-import java.security.cert.TrustAnchor;
 import java.text.DecimalFormat;
 
 public class DetailProduct extends AppCompatActivity {

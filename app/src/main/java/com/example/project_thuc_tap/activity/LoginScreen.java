@@ -44,6 +44,7 @@ public class LoginScreen extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private final int RC_SIGN_IN = 123;
+    public static String EMAIL = "";
 
 
 
@@ -89,6 +90,7 @@ public class LoginScreen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            EMAIL = email;
                             Toast.makeText(LoginScreen.this, "đăng nhập thành công !", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(LoginScreen.this, MainActivity.class));
                             //khi đăng nhập

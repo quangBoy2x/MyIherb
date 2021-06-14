@@ -1,25 +1,32 @@
-package com.example.project_thuc_tap;
+package com.example.project_thuc_tap.activity;
 
-import android.app.AlertDialog;
+import android.app.VoiceInteractor;
 import android.os.Bundle;
-import android.text.PrecomputedText;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.project_thuc_tap.R;
 import com.example.project_thuc_tap.adapter.CartAdapter;
-import com.example.project_thuc_tap.model.Cart;
+import com.example.project_thuc_tap.ulities.Server;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +45,8 @@ public class TabShopping extends Fragment {
     TextView tvTotalProducts;
     ListView lvProducts;
     CartAdapter adapter;
+    public static long totalMoney;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -93,6 +102,7 @@ public class TabShopping extends Fragment {
         lvProducts.setAdapter(adapter);
         CheckData();
         EvenUlties();
+        Purchase();
 
         return v;
     }
@@ -106,11 +116,14 @@ public class TabShopping extends Fragment {
         for(int i = 0; i <TabHome.carts.size();i++){
             totalPrice += TabHome.carts.get(i).getGiasp();
         }
+        totalMoney = totalPrice;
         DecimalFormat del = new DecimalFormat("###,###,###");
         tvTotalPrice.setText(del.format(totalPrice) + "Đ");
     }
 
+
     private void CheckData() {
+
         if(TabHome.carts.size() <=0){
 //            adapter.notifyDataSetChanged();
             tvDefaultIfNull.setVisibility(View.VISIBLE);
@@ -120,5 +133,36 @@ public class TabShopping extends Fragment {
             tvDefaultIfNull.setVisibility(View.INVISIBLE);
             lvProducts.setVisibility(View.VISIBLE);
         }
+    }
+    //xu li khi mua hang
+    //todo chua lam xong can hoan thien vao toi nay update don hang len server
+    public void Purchase(){
+        btnPurchase.setOnClickListener(v -> {
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            //gui cho sever voi dang string request
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.urlBill, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d("idBill", response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("email", LoginScreen.EMAIL);
+                    hashMap.put("totalMoney", String.valueOf(totalMoney));
+                    return hashMap;
+                }
+            };
+            requestQueue.add(stringRequest);
+        });
+
+
     }
 }

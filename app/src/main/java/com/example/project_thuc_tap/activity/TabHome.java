@@ -1,26 +1,18 @@
-package com.example.project_thuc_tap;
+package com.example.project_thuc_tap.activity;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -29,7 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.project_thuc_tap.activity.DetailProduct;
+import com.example.project_thuc_tap.R;
 import com.example.project_thuc_tap.adapter.ProductAdapter;
 import com.example.project_thuc_tap.model.Cart;
 import com.example.project_thuc_tap.model.Product;

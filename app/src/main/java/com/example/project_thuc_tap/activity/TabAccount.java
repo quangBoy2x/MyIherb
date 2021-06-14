@@ -1,4 +1,4 @@
-package com.example.project_thuc_tap;
+package com.example.project_thuc_tap.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.project_thuc_tap.R;
 
 /**
  * A simple {@link Fragment} subclass.
