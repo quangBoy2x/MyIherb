@@ -5,4 +5,5 @@ public class Server {
     public static String urlProductNew = "http://" + localHost + "/androidwebservice/getloaiSPmoinhat.php";
     public static String urlGuest = "http://" + localHost + "/androidwebservice/luuthongtinkhachhang.php";
     public static String urlBill = "http://" + localHost + "/androidwebservice/createdonhang.php";
+    public static String urlDetailBill = "http://" + localHost + "/androidwebservice/createchitietdonhang.php";
 }

@@ -18,11 +18,16 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.project_thuc_tap.R;
 import com.example.project_thuc_tap.adapter.CartAdapter;
 import com.example.project_thuc_tap.ulities.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -110,6 +115,8 @@ public class TabShopping extends Fragment {
 
 
 
+
+
     //cho pulic để sử dụng cho bên cartAdapter trường hợp update lại sản phẩm
     public static void EvenUlties() {
         long totalPrice = 0;
@@ -143,7 +150,57 @@ public class TabShopping extends Fragment {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.urlBill, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Log.d("idBill", response);
+//                     Log ra để kiểm tra tải bill thành công hay thất bại
+//                    Log.d("idBill", response);
+                    //neu tao don hang thanh cong thi update len chi tiet don hang
+                    if(Integer.parseInt(response)>0){
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        StringRequest request = new StringRequest(Request.Method.POST, Server.urlDetailBill, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if(response.equals("1")){
+                                    TabHome.carts.clear();
+                                    Log.d("add","1");
+
+                                }
+                                else {
+                                    Log.d("add","0");
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }){
+
+                            @Nullable
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                JSONArray jsonArray = new JSONArray();
+                                for(int i = 0; i < TabHome.carts.size(); i++){
+                                    JSONObject jsonObject = new JSONObject();
+                                    //key trong jsonOBJ.put thi can phai trung voi createchitietdonhang.php
+                                    try {
+                                        jsonObject.put("iddonhang", response);
+                                        jsonObject.put("idsanpham", TabHome.carts.get(i).getId());
+                                        jsonObject.put("giasanpham", TabHome.carts.get(i).getGiasp());
+                                        jsonObject.put("tensanpham", TabHome.carts.get(i).getTensp());
+                                        jsonObject.put("soluong", TabHome.carts.get(i).getSoluong());
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    //day vao json array roi put len server
+                                    jsonArray.put(jsonObject);
+                                }
+                                HashMap<String, String> hashMap = new HashMap<>();
+                                hashMap.put("json",jsonArray.toString());
+                                return hashMap;
+                            }
+                        };
+                        queue.add(request);
+                    }
+
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -165,4 +222,6 @@ public class TabShopping extends Fragment {
 
 
     }
+
+
 }
